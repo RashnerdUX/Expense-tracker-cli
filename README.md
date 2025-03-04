@@ -42,20 +42,24 @@ This Python script is a simple command-line expense tracker that allows you to r
 
 ### Example Usage
 ====================================================================================================
-Welcome to your Expense Tracker
+**Welcome to your Expense Tracker**  
 What would you like to do?
 
-Add an expense
-Delete an expense
-Update an expense
-View all expenses
-Show a quick summary
-Save and Exit Program 
-Enter your option: 1 
----------------------------------------------
-Enter the amount of your expense: 25.50 
-What did you spend this money on: Lunch 
-You've added a new expense [{'id': 1, 'date': '2024-10-27', 'description': 'Lunch', 'amount': 25.5}] 
+- Add an expense  
+- Delete an expense  
+- Update an expense  
+- View all expenses  
+- Show a quick summary  
+- Save and Exit Program  
+
+**Enter your option:** `1`  
+---------------------------------------------  
+**Enter the amount of your expense:** `25.50`  
+**What did you spend this money on:** `Lunch`  
+
+You've added a new expense:  
+```json
+[{'id': 1, 'date': '2024-10-27', 'description': 'Lunch', 'amount': 25.5}]
 ... 
 Enter your option: 4 
 ---------------------------------------------
