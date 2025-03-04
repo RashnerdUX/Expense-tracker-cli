@@ -52,20 +52,20 @@ View all expenses
 Show a quick summary
 Save and Exit Program 
 Enter your option: 1 
-==================================================================================================== 
+---------------------------------------------
 Enter the amount of your expense: 25.50 
 What did you spend this money on: Lunch 
 You've added a new expense [{'id': 1, 'date': '2024-10-27', 'description': 'Lunch', 'amount': 25.5}] 
 ... 
 Enter your option: 4 
-==================================================================================================== 
+---------------------------------------------
 Here are your expenses so far 
 ID Date Description Amount 
 1 2024-10-27 Lunch $25.5 
 Done 
 ... 
 Enter your option: 6 
-==================================================================================================== 
+--------------------------------------------- 
 Saving your records
 ... 
 Your expenses have been saved to expenses_save.csv
