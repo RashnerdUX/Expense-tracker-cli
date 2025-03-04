@@ -44,11 +44,11 @@ def load_file():
 
 
 def add(expense_list, exp_id):
-    amount = int(input("Enter the amount of your expense: "))
+    amount = float(input("Enter the amount of your expense: "))
     description = input("What did you spend this money on: ")
     exp_id += 1
 
-    expense = {"id":exp_id, "date":today, "description":description, "amount":amount}
+    expense = {"id":exp_id, "date":today.strftime("%Y-%m-%d"), "description":description, "amount":amount}
     expense_list.append(expense)
     print("A new expense has been added")
 
@@ -93,10 +93,10 @@ def expense_summary(expense_list):
 
 def print_expenses(expense_list):
     print("This will format the expense list")
-    print(f"{"ID":<3} {"Date":<12} {"Description":<20} {"Amount":<8}")
+    print(f'{"ID":<3} {"Date":<12} {"Description":<20} {"Amount":<8}')
 
     for item in expense_list:
-        print(f"{item["id"]:<3} {item["date"]:<12} {item["description"]:<20} ${item["amount"]:<8}")
+        print(f'{item["id"]:<3} {item["date"]:<12} {item["description"]:<20} ${item["amount"]:<8}')
     print("Done")
 
 def program_interface():
