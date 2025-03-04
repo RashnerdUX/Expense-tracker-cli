@@ -11,7 +11,7 @@ today = date.today() #Returns today's date as yyyy/mm/dd
 month_of_interest = today.month
 
 def save_file(expense_list):
-    print("This will create a file and save the expenses")
+    print("Saving your records...")
     with open(filename, mode="w", newline="", encoding="utf-8") as file:
         fieldnames = expense_list[0].keys()
         writer = csv.DictWriter(file, fieldnames=fieldnames)
@@ -22,7 +22,7 @@ def save_file(expense_list):
 
 def load_file():
     list_of_expenses = []
-    print("This will load the save file")
+    print("Loading save file...")
     try:
         with open(filename, mode="r") as file:
             reader = csv.DictReader(file)
@@ -30,13 +30,12 @@ def load_file():
             list_of_expenses.clear()
 
             for row in reader:
-                print(row)
                 #This ensures that id is loaded as a type 'int'
                 row["id"] = int(row["id"])
                 #This ensure that amount is loaded as type 'float'
                 row["amount"] = float(row["amount"])
                 list_of_expenses.append(row)
-            print("The program has successfully loaded the file")
+            print("The program has successfully loaded your record")
     except FileNotFoundError:
         print("There was no save file to load from. Starting with a scrubbed record")
 
@@ -50,7 +49,7 @@ def add(expense_list, exp_id):
 
     expense = {"id":exp_id, "date":today.strftime("%Y-%m-%d"), "description":description, "amount":amount}
     expense_list.append(expense)
-    print("A new expense has been added")
+    print("You've added a new expense")
 
     return expense_list, exp_id
 
@@ -74,22 +73,26 @@ def update(expense_list):
             print("What do you want to update in this expense?")
             print("1. Description\n2. Amount")
             choice = int(input("Make your choice: "))
-            if choice == 1:
-                new_desc = input("Enter a new description: ")
-                item["description"] = new_desc
-                print(f"The description for Expense with id {exp_id} has been updated.")
-            elif choice == 2:
-                new_amount = int(input("Enter a new amount: "))
-                item["amount"] = new_amount
-                print(f"The amount for Expense with id {exp_id} has been updated.")
-            else:
-                print("You have entered a wrong option")
-                program_interface()
+            try:
+                if choice == 1:
+                    new_desc = input("Enter a new description: ")
+                    item["description"] = new_desc
+                    print(f"The description for Expense with id {exp_id} has been updated.")
+                elif choice == 2:
+                    new_amount = int(input("Enter a new amount: "))
+                    item["amount"] = new_amount
+                    print(f"The amount for Expense with id {exp_id} has been updated.")
+                else:
+                    print("You have entered a wrong option")
+                    program_interface()
+            except ValueError:
+                print("You're trying to edit a non-existent property")
+                break
     return expense_list
 
 def expense_summary(expense_list):
     total = sum(item["amount"] for item in expense_list)
-    print(f"Total Expenses: {total}")
+    print(f"Total Expenses: ${total}")
 
 def print_expenses(expense_list):
     print("This will format the expense list")
