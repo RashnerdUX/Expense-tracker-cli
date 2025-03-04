@@ -19,7 +19,6 @@ def save_file(expense_list):
         writer.writerows(expense_list)
 
     print("Your expenses have been saved to ", filename)
-    exit()
 
 def load_file():
     list_of_expenses = []
@@ -58,10 +57,9 @@ def add(expense_list, exp_id):
 def delete(expense_list):
     delete_id = int(input("Enter the id of the expense you want to delete: "))
 
-    # Filter out the dictionary with the given id
+    #This will create a new list without the deleted entry
     new_list = [item for item in expense_list if item["id"] != delete_id]
 
-    # Check if any item was actually removed
     if len(new_list) == len(expense_list):
         print(f"No expense found with id {delete_id}.")
     else:
@@ -102,35 +100,37 @@ def print_expenses(expense_list):
     print("Done")
 
 def program_interface():
+    global start_file
     start_file = load_file()
     expense_id = max((expense["id"] for expense in start_file), default=0)
 
-    print("="*100)
-    print("Welcome to your Expense Tracker")
-    print("What would you like to do?")
-    print("1. Add an expense\n2. Delete an expense\n3. Update an expense\n4. View all expenses\n5. Show a quick summary\n6. Save and Exit Program")
-    option = int(input("Enter your option: "))
-    print("=" * 100)
+    while True:
+        print("="*100)
+        print("Welcome to your Expense Tracker")
+        print("What would you like to do?")
+        print("1. Add an expense\n2. Delete an expense\n3. Update an expense\n4. View all expenses\n5. Show a quick summary\n6. Save and Exit Program")
+        option = int(input("Enter your option: "))
+        print("=" * 100)
 
-    try:
-        if option == 1:
-            add(start_file,expense_id)
-        elif option == 2:
-            delete(start_file)
-        elif option == 3:
-            update(start_file)
-        elif option == 4:
-            print("View the entire the list")
-            print_expenses(start_file)
-        elif option == 5:
-            expense_summary(start_file)
-        elif option == 6:
-            save_file(start_file)
-    except ValueError:
-        print("You have entered an option that isn't allowed")
-        program_interface()
+        try:
+            if option == 1:
+                start_file, expense_id = add(start_file,expense_id)
+                print(start_file)
+            elif option == 2:
+                start_file = delete(start_file)
+            elif option == 3:
+                start_file = update(start_file)
+            elif option == 4:
+                print("View the entire the list")
+                print_expenses(start_file)
+            elif option == 5:
+                expense_summary(start_file)
+            elif option == 6:
+                save_file(start_file)
+                break
+        except ValueError:
+            print("You have entered an option that isn't allowed")
+            program_interface()
 
-    program_interface()
-
-#The program starts with loading the save file
+#This is the start of the program
 program_interface()
