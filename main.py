@@ -1,17 +1,18 @@
 import datetime
 import csv
 
-
 #csv filename
 filename = "expenses_save.csv"
 
 #This will generate the day's date
 date = datetime.date
 today = date.today() #Returns today's date as yyyy/mm/dd
-month_of_interest = today.month
 
 def save_file(expense_list):
     print("Saving your records...")
+    if not expense_list:
+        print("You have no records to save. See you later")
+        exit()
     with open(filename, mode="w", newline="", encoding="utf-8") as file:
         fieldnames = expense_list[0].keys()
         writer = csv.DictWriter(file, fieldnames=fieldnames)
@@ -95,7 +96,10 @@ def expense_summary(expense_list):
     print(f"Total Expenses: ${total}")
 
 def print_expenses(expense_list):
-    print("This will format the expense list")
+
+    if not expense_list:
+        print("You currently have no recorded expenses")
+    print("Here are your expenses so far")
     print(f'{"ID":<3} {"Date":<12} {"Description":<20} {"Amount":<8}')
 
     for item in expense_list:
@@ -124,7 +128,6 @@ def program_interface():
             elif option == 3:
                 start_file = update(start_file)
             elif option == 4:
-                print("View the entire the list")
                 print_expenses(start_file)
             elif option == 5:
                 expense_summary(start_file)
